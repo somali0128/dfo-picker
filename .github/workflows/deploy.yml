@@ -12,6 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false  # This line ensures credentials are not persisted
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -25,7 +28,7 @@ jobs:
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages  # The branch the action should deploy to.
-          folder: build     # The folder the action should deploy.
-          clean: true       # Automatically remove deleted files from the deploy branch
+
+      - name: Clean up Deployment
+        if: always()
+        run: git worktree prune
