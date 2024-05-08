@@ -19,7 +19,8 @@ function App() {
   };
 
   const handleAddRole = () => {
-    const apiURL = `/df/servers/cain/characters?characterName=${characterName}&apikey=mSegaLMyPdH6ejXGUtDDfMBfT3aFLexL`;
+    // const apiURL = `/df/servers/cain/characters?characterName=${characterName}&apikey=mSegaLMyPdH6ejXGUtDDfMBfT3aFLexL`;
+    const apiURL = `https://api.dfoneople.com/df/servers/cain/characters?characterName=${characterName}&apikey=mSegaLMyPdH6ejXGUtDDfMBfT3aFLexL`
     axios
       .get(apiURL)
       .then((response) => {
