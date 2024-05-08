@@ -20,9 +20,13 @@ function App() {
 
   const handleAddRole = () => {
     // const apiURL = `/df/servers/cain/characters?characterName=${characterName}&apikey=mSegaLMyPdH6ejXGUtDDfMBfT3aFLexL`;
-    const apiURL = `https://api.dfoneople.com/df/servers/cain/characters?characterName=${characterName}&apikey=mSegaLMyPdH6ejXGUtDDfMBfT3aFLexL`
+    const apiURL = `https://api.dfoneople.com/df/servers/cain/characters?characterName=${characterName}`;
     axios
-      .get(apiURL)
+      .get(apiURL, {
+        headers: {
+          apikey: "mSegaLMyPdH6ejXGUtDDfMBfT3aFLexL",
+        },
+      })
       .then((response) => {
         setCharacterData(response.data.rows[0]);
       })
