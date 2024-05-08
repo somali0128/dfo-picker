@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/dfo-picker/static/css/main.49be87c0.css",
+    "main.js": "/dfo-picker/static/js/main.30df4d65.js",
+    "static/js/453.6dd4443e.chunk.js": "/dfo-picker/static/js/453.6dd4443e.chunk.js",
+    "index.html": "/dfo-picker/index.html",
+    "main.49be87c0.css.map": "/dfo-picker/static/css/main.49be87c0.css.map",
+    "main.30df4d65.js.map": "/dfo-picker/static/js/main.30df4d65.js.map",
+    "453.6dd4443e.chunk.js.map": "/dfo-picker/static/js/453.6dd4443e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.49be87c0.css",
+    "static/js/main.30df4d65.js"
+  ]
+}
