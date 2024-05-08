@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import RoleButton from "./components/RoleButton";
 import CharacterModal from "./components/CharacterModal";
 import axios from "axios";
 
