@@ -1,13 +1,37 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.input, .button {
+  padding: 8px;
+  margin: 4px;
+  color: #2d3748; /* Dark text color for input and buttons */
+  background-color: #f7fafc; /* Light background for inputs */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.input:focus {
+  outline: none;
+  border-color: #3182ce;
+  box-shadow: 0 0 0 1px #3182ce;
 }
+
+.button {
+  background-color: #2d3748; /* Dark button background */
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #4a5568;
+}
+
+.form-radio {
+  margin: 0 8px 0 0;
+}
+
+.label-radio {
+  cursor: pointer;
+  margin-right: 16px;
+}
+
