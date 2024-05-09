@@ -66,55 +66,67 @@ function App() {
 
   function autoClassifyCharacters() {
     // Reset all character team assignments
-    let resetChars = characters.map(char => ({ ...char, color: '' }));
-    
+    let resetChars = characters.map((char) => ({ ...char, color: "" }));
+
     // Initialize teams
     let teams = { R: [], B: [], G: [] };
-  
+
     // Separate buffers from non-buffers
-    const buffers = resetChars.filter(char => char.isBuffer);
-    const nonBuffers = resetChars.filter(char => !char.isBuffer);
-  
+    const buffers = resetChars.filter((char) => char.isBuffer);
+    const nonBuffers = resetChars.filter((char) => !char.isBuffer);
+
     // Randomly distribute buffers first to ensure each team gets one if available
-    buffers.forEach(buffer => {
-      const possibleTeams = ['R', 'B', 'G'].filter(team => 
-        teams[team].length < 4 && // Ensure team isn't full
-        teams[team].every(c => c.isBuffer === false) // Ensure no buffer is already assigned
+    buffers.forEach((buffer) => {
+      const possibleTeams = ["R", "B", "G"].filter(
+        (team) =>
+          teams[team].length < 4 && // Ensure team isn't full
+          teams[team].every((c) => c.isBuffer === false) // Ensure no buffer is already assigned
       );
-  
+
       if (possibleTeams.length > 0) {
-        const selectedTeam = possibleTeams[Math.floor(Math.random() * possibleTeams.length)];
+        const selectedTeam =
+          possibleTeams[Math.floor(Math.random() * possibleTeams.length)];
         buffer.color = selectedTeam;
         teams[selectedTeam].push(buffer);
       }
     });
-  
+
     // Function to check if a team can accept more characters
     const canAddToTeam = (team, char) => {
-      const futureTotalPower = teams[team].reduce((acc, c) => acc + c.combatPower, 0) + char.combatPower;
+      const futureTotalPower =
+        teams[team].reduce((acc, c) => acc + c.combatPower, 0) +
+        char.combatPower;
       const isBelowMax = teams[team].length < 4;
       return isBelowMax && futureTotalPower >= 3;
     };
-  
+
     // Distribute non-buffers aiming to meet minimum requirements first
-    nonBuffers.forEach(char => {
-      const possibleTeams = ['R', 'B', 'G'].filter(team => canAddToTeam(team, char) || teams[team].length < 3);
-  
+    nonBuffers.forEach((char) => {
+      const possibleTeams = ["R", "B", "G"].filter(
+        (team) => canAddToTeam(team, char) || teams[team].length < 3
+      );
+
       // Sort teams by their need and power
       possibleTeams.sort((a, b) => teams[a].length - teams[b].length);
-  
+
       if (possibleTeams.length > 0) {
         char.color = possibleTeams[0];
         teams[possibleTeams[0]].push(char);
       } else {
-        console.warn("Could not assign character", char.nickname, "to any team.");
+        console.warn(
+          "Could not assign character",
+          char.nickname,
+          "to any team."
+        );
       }
     });
-  
+
     // Final pass to ensure all teams have at least 3 members, trying to redistribute if possible
-    ['R', 'B', 'G'].forEach(team => {
+    ["R", "B", "G"].forEach((team) => {
       while (teams[team].length < 3) {
-        const candidate = nonBuffers.find(char => !char.color && (teams[team].length < 4));
+        const candidate = nonBuffers.find(
+          (char) => !char.color && teams[team].length < 4
+        );
         if (candidate) {
           candidate.color = team;
           teams[team].push(candidate);
@@ -123,14 +135,10 @@ function App() {
         }
       }
     });
-  
+
     // Update state with new team assignments
     setCharacters([...buffers, ...nonBuffers]);
   }
-  
-  
-  
-  
 
   return (
     <div className="App bg-gray-800 min-h-screen text-white">
