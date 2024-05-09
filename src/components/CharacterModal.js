@@ -2,13 +2,24 @@ import React, { useState } from "react";
 
 const CharacterModal = ({ character, onClose, onSave }) => {
   const [nickname, setNickname] = useState("");
-  const [combatPower, setCombatPower] = useState(0);
+  const [combatPower, setCombatPower] = useState("");
   const [isBuffer, setIsBuffer] = useState(false);
 
   const handleSave = () => {
     onSave({ ...character, nickname, combatPower, isBuffer });
     onClose();
   };
+
+  function handleCombatPowerChange(e) {
+    const value = e.target.value;
+    setCombatPower(value === '' ? '' : Math.max(0, Number(value)));
+  }
+  
+  function handleCombatPowerBlur(e) {
+    if (e.target.value === '') {
+      setCombatPower(0);  // Set to 0 if input is empty on blur
+    }
+  }
 
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex justify-center items-center">
@@ -23,18 +34,16 @@ const CharacterModal = ({ character, onClose, onSave }) => {
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
             placeholder="取一个昵称"
-            className="border rounded p-1"
+            className="border rounded p-1 w-full"
           />
           <input
             type="number"
             value={combatPower}
-            onChange={(e) =>
-              setCombatPower(Math.max(0, Math.min(5, Number(e.target.value))))
-            }
-            placeholder="即战力 (0-5)"
-            className="border rounded p-1"
+            onChange={handleCombatPowerChange}
+            onBlur={handleCombatPowerBlur}
+            placeholder="即战力"
+            className="border rounded p-1 w-full"
             min="0"
-            max="5"
           />
           <div>
             <label>

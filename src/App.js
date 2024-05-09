@@ -194,7 +194,7 @@ function App() {
             type="text"
             value={characterName}
             onChange={handleInputChange}
-            placeholder="Enter character name"
+            placeholder="输入角色名"
             className="p-2 rounded input"
           />
           <button
