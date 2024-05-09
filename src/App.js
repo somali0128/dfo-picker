@@ -189,7 +189,7 @@ function App() {
           </div>
         </div>
 
-        <div className="flex space-x-4 my-4">
+        <div className="flex flex-wrap space-x-4 my-4">
           <input
             type="text"
             value={characterName}
@@ -204,11 +204,11 @@ function App() {
             添加成员
           </button>
         </div>
-        <div className="grid grid-flow-row-dense grid-cols-auto-fit min-w-[160px] gap-4">
+        <div className="grid grid-flow-row-dense grid-cols-auto-fit gap-4">
           {characters.map((char, index) => (
             <div
               key={index}
-              className="m-4 p-4 border rounded flex justify-between min-w-[182px] items-center relative"
+              className="p-2 border rounded flex justify-between min-w-[182px] items-center relative"
             >
               <button
                 onClick={() => deleteCharacter(index)}

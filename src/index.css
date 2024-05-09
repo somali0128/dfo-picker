@@ -7,6 +7,7 @@
   margin: 4px;
   color: #2d3748; /* Dark text color for input and buttons */
   background-color: #f7fafc; /* Light background for inputs */
+  max-width: -webkit-fill-available;
 }
 
 .input:focus {
