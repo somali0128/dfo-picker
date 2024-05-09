@@ -2,9 +2,11 @@ import React, { useState } from "react";
 
 const CharacterModal = ({ character, onClose, onSave }) => {
   const [nickname, setNickname] = useState("");
+  const [combatPower, setCombatPower] = useState(0);
+  const [isBuffer, setIsBuffer] = useState(false);
 
   const handleSave = () => {
-    onSave({ ...character, nickname });
+    onSave({ ...character, nickname, combatPower, isBuffer });
     onClose();
   };
 
@@ -23,6 +25,27 @@ const CharacterModal = ({ character, onClose, onSave }) => {
             placeholder="取一个昵称"
             className="border rounded p-1"
           />
+          <input
+            type="number"
+            value={combatPower}
+            onChange={(e) =>
+              setCombatPower(Math.max(0, Math.min(5, Number(e.target.value))))
+            }
+            placeholder="即战力 (0-5)"
+            className="border rounded p-1"
+            min="0"
+            max="5"
+          />
+          <div>
+            <label>
+              <input
+                type="checkbox"
+                checked={isBuffer}
+                onChange={(e) => setIsBuffer(e.target.checked)}
+              />{" "}
+              Buffer?
+            </label>
+          </div>
           <div className="flex space-x-2">
             <button
               onClick={handleSave}

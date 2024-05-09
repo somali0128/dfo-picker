@@ -19,14 +19,8 @@ function App() {
   };
 
   const handleAddRole = () => {
-    // const apiURL = `/df/servers/cain/characters?characterName=${characterName}&apikey=mSegaLMyPdH6ejXGUtDDfMBfT3aFLexL`;
-    const apiURL = `https://api.dfoneople.com/df/servers/cain/characters?characterName=${characterName}`;
-    axios
-      .get(apiURL, {
-        headers: {
-          apikey: "mSegaLMyPdH6ejXGUtDDfMBfT3aFLexL",
-        },
-      })
+    const apiURL = `https://dfo-picker-backend.vercel.app/characters?characterName=${characterName}`;
+    axios.get(apiURL)
       .then((response) => {
         setCharacterData(response.data.rows[0]);
       })
@@ -74,17 +68,27 @@ function App() {
             添加成员
           </button>
         </div>
+        <div className="grid grid-flow-row-dense grid-cols-auto-fit min-w-[160px] gap-4">
         {characters.map((char, index) => (
           <div
             key={index}
-            className="m-4 p-4 border rounded flex justify-between items-center"
+            className="m-4 p-4 border rounded flex justify-between items-center relative"
           >
-            <div>
+                <button
+              onClick={() => deleteCharacter(index)}
+              className="absolute top-1 right-1 text-red-400 hover:text-gray-400"
+              aria-label="Close"
+            >
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
+            </button>
+            <div className="flex flex-col space-y-2">
               <p>
                 游戏名: {char.characterName} ({char.nickname})
               </p>
               <p>职业: {char.jobGrowName}</p>
               <p>名望: {char.fame}</p>
+              <p>即战力: {char.combatPower}</p>
+              <p>Role: {char.isBuffer ? 'Buffer' : 'DPS'}</p>
               <div className="flex space-x-4 items-center mt-2">
                 <label className="flex items-center text-red-500 cursor-pointer">
                   <input
@@ -118,14 +122,15 @@ function App() {
                 </label>
               </div>
             </div>
-            <button
+            {/* <button
               onClick={() => deleteCharacter(index)}
               className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
             >
               移除
-            </button>
+            </button> */}
           </div>
         ))}
+        </div>
       </header>
       {characterData && (
         <CharacterModal

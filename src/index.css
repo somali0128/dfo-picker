@@ -15,6 +15,10 @@
   box-shadow: 0 0 0 1px #3182ce;
 }
 
+.grid-cols-auto-fit {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
 .button {
   background-color: #2d3748; /* Dark button background */
   color: white;
