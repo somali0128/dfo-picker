@@ -208,7 +208,7 @@ function App() {
           {characters.map((char, index) => (
             <div
               key={index}
-              className="m-4 p-4 border rounded flex justify-between items-center relative"
+              className="m-4 p-4 border rounded flex justify-between min-w-[182px] items-center relative"
             >
               <button
                 onClick={() => deleteCharacter(index)}
